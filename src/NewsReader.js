@@ -3,6 +3,7 @@ import { QueryForm } from './QueryForm';
 import { Articles } from './Articles';
 import { useState, useEffect } from 'react';
 import { exampleQuery ,exampleData } from './data';
+import { getNewsApi, saveNewsApi } from './rest';
 
 export function NewsReader() {
   const [query, setQuery] = useState(exampleQuery); // latest query send to newsapi
@@ -19,7 +20,7 @@ export function NewsReader() {
 
   async function getNews(queryObject) {
     if (queryObject.q) {
-        setData(exampleData);
+      saveNewsApi(queryObject, setData);
     } else {
       setData({});
     }
