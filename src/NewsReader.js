@@ -1,23 +1,28 @@
 
-import { QueryForm } from './QueryForm';
-import { Articles } from './Articles';
+import { QueryForm } from './components/QueryForm';
+import { Articles } from './components/Articles';
 import { useState, useEffect } from 'react';
 import { exampleQuery ,exampleData } from './data';
-import { getQueryApi, saveNewsApi, saveQueryApi } from './rest';
 import { SavedQueries } from './SavedQueries';
-const urlNews="/news";
-const urlQueries = "/queries";
+import { LoginForm } from './components/LoginForm';
+import { getQueryApi, saveQueryApi } from './rest/queries';
+import { saveNewsApi } from './rest/news';
+import { loginApi } from './rest/login';
+
+
 
 export function NewsReader() {
   const [query, setQuery] = useState(exampleQuery); // latest query send to newsapi
   const [data, setData] = useState(exampleData);   // current data returned from newsapi
   const [queryFormObject, setQueryFormObject] = useState({ ...exampleQuery });
   const [savedQueries, setSavedQueries] = useState([{ ...exampleQuery }]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [credentials, setCredentials] = useState({ user: "", password: "" });
 
   useEffect(() => {
     getNews(query);
   }, [query])
-  useEffect(() => {getQueryApi(urlQueries,setSavedQueries);}, [])
+  useEffect(() => {getQueryApi(setSavedQueries);}, [])
 
 
   function onFormSubmit(queryObject) {
@@ -30,13 +35,13 @@ export function NewsReader() {
     }
     console.log(JSON.stringify(newSavedQueries));
     setSavedQueries(newSavedQueries); 
-    saveQueryApi(urlQueries, newSavedQueries);
+    saveQueryApi(newSavedQueries);
     setQuery(queryObject);
   }
 
   async function getNews(queryObject) {
     if (queryObject.q) {
-      saveNewsApi(urlNews, queryObject, setData);
+      saveNewsApi(queryObject, setData);
     } else {
       setData({});
     }
@@ -45,9 +50,21 @@ export function NewsReader() {
     setQueryFormObject(selectedQuery);
     setQuery(selectedQuery);
    }
+   function login(){
+    if (currentUser !== null) {
+      // logout
+      setCurrentUser(null);
+    } else {
+      loginApi(credentials, setCurrentUser);
+    }
+   }
 
   return (
     <div>
+        <LoginForm login={login} 
+        credentials={credentials} 
+        currentUser={currentUser} 
+        setCredentials={setCredentials} />
       <div >
         <section className="parent" >
           <div className="box">
