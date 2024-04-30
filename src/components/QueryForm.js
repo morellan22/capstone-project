@@ -5,7 +5,17 @@ export function QueryForm(params) {
         newQueryObject[event.target.name] = event.target.value;
         params.setFormObject(newQueryObject);
     };
-
+    function currentUserIsAdmin(){
+        if(params.currentUser){
+        if(params.currentUser.user){
+        if(params.currentUser.user === "admin"){
+        return true;
+        }
+        }
+        }
+        return false;
+       }
+       
     function onSubmitClick(event) {
         event.preventDefault();
         if (!params.formObject.queryName) {
@@ -34,7 +44,13 @@ export function QueryForm(params) {
                     <input type="button" value="Submit" onClick={onSubmitClick} />
                 </span>                
             </form>
+            <div className={(currentUserIsAdmin())?"visible":"hidden"} 
+                style={{border: "solid black 1px"}}>
+                {/* Extra fields */}
+                <p>extra admin stuff</p>
+            </div>
         </div>
+
     );
 
 }
