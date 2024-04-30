@@ -3,9 +3,10 @@ import { QueryForm } from './QueryForm';
 import { Articles } from './Articles';
 import { useState, useEffect } from 'react';
 import { exampleQuery ,exampleData } from './data';
-import { saveNewsApi } from './rest';
+import { getQueryApi, saveNewsApi, saveQueryApi } from './rest';
 import { SavedQueries } from './SavedQueries';
 const urlNews="/news";
+const urlQueries = "/queries";
 
 export function NewsReader() {
   const [query, setQuery] = useState(exampleQuery); // latest query send to newsapi
@@ -16,6 +17,8 @@ export function NewsReader() {
   useEffect(() => {
     getNews(query);
   }, [query])
+  useEffect(() => {getQueryApi(urlQueries,setSavedQueries);}, [])
+
 
   function onFormSubmit(queryObject) {
     let newSavedQueries = [];
@@ -27,6 +30,7 @@ export function NewsReader() {
     }
     console.log(JSON.stringify(newSavedQueries));
     setSavedQueries(newSavedQueries); 
+    saveQueryApi(urlQueries, newSavedQueries);
     setQuery(queryObject);
   }
 
