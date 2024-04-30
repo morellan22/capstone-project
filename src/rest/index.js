@@ -1,8 +1,8 @@
 
-const baseURL = "http://localhost:4000/";
- const fetchData = async(url, myInit)=>{
+const baseURL = "http://localhost:4000";
+ const fetchData = async(url, options)=>{
     try {
-         let response = await fetch(url, myInit);
+         let response = await fetch(baseURL + url, options);
         console.log(response);
          if(!response.ok)
             throw new Error(`Error fetching data: ${response.status}`);
@@ -14,7 +14,7 @@ const baseURL = "http://localhost:4000/";
  }
 
 
-    export async function saveNewsApi(news,callback){
+    export async function saveNewsApi(urlNews,news,callback){
         console.log(news)
         const myInit = {
             method:'POST',
@@ -24,7 +24,7 @@ const baseURL = "http://localhost:4000/";
             };
         let data = {};
         try {
-            data = await fetchData(baseURL + 'news', myInit);
+            data = await fetchData(urlNews, myInit);
         } catch (error) {
             console.error(error);
         }
