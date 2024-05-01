@@ -1,8 +1,7 @@
 import { NewsReader } from './NewsReader';
 import './App.css';
-import 'bootstrap';
 function App() {
-
+document.title="News Reader App"
   return (
     <div>
       <header>

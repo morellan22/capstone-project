@@ -8,7 +8,7 @@ export function Articles(params) {
     let queryName = (params.query.queryName)?params.query.queryName:"na";
     let articleCount = (params.data.totalResults)?params.data.totalResults:0;
     console.log("detailsClass:%s",detailsClass)
-    function onClickCollapsible(item){
+    function onClickDetails(item){
       console.log("detailsClass:%s",detailsClass)
       if(item.title===itemDetail.title){
         setDetailsClass(!detailsClass);
@@ -32,11 +32,9 @@ export function Articles(params) {
                   if(item.title === "[Removed]"){
                     return (<li key={idx} >Was Removed</li>);
                   }
-                  let trimTitle = item.title.substring(0,30);
-                  return (<li key={idx} className={(!detailsClass&&item.title===itemDetail.title) ? "selected" : ""} 
-                  onClick={()=>onClickCollapsible(item)}>{trimTitle} 
-                  &nbsp;
-                  <a href={item.url} target="_blank" rel="noreferrer" >&nbsp;Link</a></li>);    
+                  let trimTitle = item.title.substring(0,150);
+                  return (<li key={idx} className={(!detailsClass&&item.title===itemDetail.title) ? "selected titleArt" : "titleArt"} 
+                  onClick={()=>onClickDetails(item)}>{trimTitle} <a href={item.url} target="_blank" rel="noreferrer" >Link</a></li>);    
                 }else{
                   return (<li key={idx}>No Title</li>);
                 }
