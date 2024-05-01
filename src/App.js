@@ -1,6 +1,6 @@
 import { NewsReader } from './NewsReader';
 import './App.css';
-
+import 'bootstrap';
 function App() {
 
   return (

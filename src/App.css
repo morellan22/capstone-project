@@ -1,3 +1,6 @@
+body{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 ol{
   font-size: small;
 }
@@ -12,4 +15,12 @@ ol{
 header,p{
   font-weight:bold;
   text-align: center;
+}
+button{
+  color:white;
+  background-color: blue;
+  border-radius: 15%;
+  border-color: blue;
+  align-content: end;
+  font-weight: bold;
 }

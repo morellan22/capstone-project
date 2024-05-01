@@ -3,7 +3,7 @@ import { QueryForm } from './components/QueryForm';
 import { Articles } from './components/Articles';
 import { useState, useEffect } from 'react';
 import { exampleQuery ,exampleData } from './data';
-import { SavedQueries } from './SavedQueries';
+import { SavedQueries } from './components/SavedQueries';
 import { LoginForm } from './components/LoginForm';
 import { getQueryApi, saveQueryApi } from './rest/queries';
 import { saveNewsApi } from './rest/news';
