@@ -11,11 +11,12 @@ console.log(params.currentUser)
 
             <div className={(params.currentUser) ? "hidden" : "visible"}>
                 <div >
+
                     <label htmlFor="user">User: </label>
-                    <input type="text" size={10} id="user" name="user" value={params.credentials.user} onChange={handleChange} />
+                    <input type="text" size={10} id="user" name="user" placeholder="Type your user" value={params.credentials.user} onChange={handleChange} />
 
                     <label htmlFor="password">Password: </label>
-                    <input type="password" size={10} id="password" name="password" value={params.credentials.password} onChange={handleChange} />
+                    <input type="password" size={10} id="password" placeholder="Type your password" name="password" value={params.credentials.password} onChange={handleChange} />
                 </div>
             </div>
             <div className="user">

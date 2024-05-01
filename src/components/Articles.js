@@ -25,6 +25,7 @@ export function Articles(params) {
         <div className={(detailsClass) ? "moreHidden" : "moreVisible"}>
                       <DetailsArticles item={itemDetail}/>
          </div>
+         <div className="scroll-container">
         <ol >{
             articles.map((item, idx) => {
               if(item){
@@ -43,6 +44,7 @@ export function Articles(params) {
               }
             })
         }</ol>
+        </div>
       </div>
     )
   

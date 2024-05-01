@@ -34,13 +34,14 @@ code {
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .box{
   border:1px solid black;
   flex:content;
   padding: 5px;
-  max-width: 33%;
+  max-width: 300px;
   font-size: small;
   justify-items: center;
   margin:1px;
