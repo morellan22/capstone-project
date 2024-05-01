@@ -22,23 +22,16 @@ export function NewsReader() {
   useEffect(() => {
     getNews(query);
   }, [query])
-  useEffect(() => {getQueryApi(setSavedQueries);}, [])
+  useEffect(() => {getQueryApi(currentUser,setSavedQueries);}, [currentUser])
 
   function currentUserMatches(user) {
-    if (currentUser) {
-    if (currentUser.user) {
-    if (currentUser.user === user) {
-    return true;
-    }
-    }
-    }
-    return false;
+      return ((currentUser) && (currentUser.user)&&(currentUser.user === user));
     }
   function onFormSubmit(queryObject) {
     if (currentUser === null){
       alert("Log in if you want to create new queries!")
       return; 
-      }
+    }
      
     if (savedQueries.length >= 3 && currentUserMatches("guest")) {
       alert("guest users cannot submit new queries once saved query count is 3 or greater!")
@@ -47,9 +40,9 @@ export function NewsReader() {
     let newSavedQueries = [];
     newSavedQueries.push(queryObject);
     for (let query of savedQueries) {
-    if (query.queryName !== queryObject.queryName) {
-    newSavedQueries.push(query);
-    }
+      if (query.queryName !== queryObject.queryName) {
+        newSavedQueries.push(query);
+      }
     }
     console.log(JSON.stringify(newSavedQueries));
     setSavedQueries(newSavedQueries); 

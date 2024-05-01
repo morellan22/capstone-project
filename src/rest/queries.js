@@ -1,19 +1,26 @@
 import { fetchData } from ".";
+import { exampleQuery } from "../data";
 
 const urlQueries = "/queries";
-export async function getQueryApi(callback){
+export async function getQueryApi(currentUser,callback){
     console.log(urlQueries)
-    const myInit = {
-        method:'GET',
-        mode: 'cors'
-        };
     let data = {};
-    try {
-        data = await fetchData(urlQueries, myInit);
-    } catch (error) {
-        console.error(error);
+    if(currentUser===null){
+        data = exampleQuery;
     }
-    console.log("getQueryApi:%s", JSON.stringify(data))
+    else{
+        const myInit = {
+            method:'GET',
+            mode: 'cors'
+            };
+
+        try {
+            data = await fetchData(urlQueries, myInit);
+        } catch (error) {
+            console.error(error);
+        }
+        console.log("getQueryApi:%s", JSON.stringify(data))
+     }
     return callback(data);
 
 } 
