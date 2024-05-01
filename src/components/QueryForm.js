@@ -5,16 +5,7 @@ export function QueryForm(params) {
         newQueryObject[event.target.name] = event.target.value;
         params.setFormObject(newQueryObject);
     };
-    function currentUserIsAdmin(){
-        if(params.currentUser){
-        if(params.currentUser.user){
-        if(params.currentUser.user === "admin"){
-        return true;
-        }
-        }
-        }
-        return false;
-       }
+
        
     function onSubmitClick(event) {
         event.preventDefault();
@@ -40,15 +31,22 @@ export function QueryForm(params) {
                     <label htmlFor="q">Query Text: </label>
                     <input type="text" size={10} id="q" name="q" value={params.formObject.q} onChange={handleChange} />
                 </div>
-                <span style={{ display: "block", backgroundColor: "#eee" }}>
+            <div className={(params.currentUserMatches("admin"))?"visible":"hidden"} 
+                style={{border: "solid black 1px"}}>
+                <div>
+                    <label htmlFor="language">Language: </label>
+                    <input type="text" size={10} id="language" name="language" value={params.formObject.language} onChange={handleChange} />
+                </div>
+                <div>
+                    <label htmlFor="pageSize">Page Size: </label>
+                    <input type="text" size={10} id="pageSize" name="pageSize" value={params.formObject.pageSize} onChange={handleChange} />
+                </div>
+            </div>
+             <span style={{ display: "block", backgroundColor: "#eee" }}>
                     <input type="button" value="Submit" onClick={onSubmitClick} />
                 </span>                
             </form>
-            <div className={(currentUserIsAdmin())?"visible":"hidden"} 
-                style={{border: "solid black 1px"}}>
-                {/* Extra fields */}
-                <p>extra admin stuff</p>
-            </div>
+
         </div>
 
     );

@@ -23,9 +23,10 @@ export function NewsReader() {
     getNews(query);
   }, [query])
   useEffect(() => {getQueryApi(currentUser,setSavedQueries);}, [currentUser])
+  useEffect(() => {setQuery(exampleQuery)}, [currentUser])
 
   function currentUserMatches(user) {
-      return ((currentUser) && (currentUser.user)&&(currentUser.user === user));
+      return ((currentUser?.user)&&(currentUser.user === user));
     }
   function onFormSubmit(queryObject) {
     if (currentUser === null){
@@ -81,7 +82,7 @@ export function NewsReader() {
           <div className="box">
             <span className='title'>Query Form</span>
             <QueryForm
-            currentUser={currentUser}
+            currentUserMatches={currentUserMatches}
               setFormObject={setQueryFormObject}
               formObject={queryFormObject}
               submitToParent={onFormSubmit} />
@@ -89,7 +90,9 @@ export function NewsReader() {
           <div className="box">
             <span className='title'>Saved Queries</span>
             <SavedQueries savedQueries={savedQueries} 
+            currentUserMatches={currentUserMatches}
               selectedQueryName={query.queryName} 
+              selectedQuery={query} 
               onQuerySelect={onSavedQuerySelect}/>
           </div>
           <div className="box">
