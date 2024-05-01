@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { exampleQuery ,exampleData } from './data';
 import { SavedQueries } from './components/SavedQueries';
 import { LoginForm } from './components/LoginForm';
-import { getQueryApi, saveQueryApi } from './rest/queries';
+import { deleteAllQueryApi, deleteQueryApi, getQueryApi, saveQueryApi } from './rest/queries';
 import { saveNewsApi } from './rest/news';
 import { loginApi } from './rest/login';
 
@@ -50,6 +50,23 @@ export function NewsReader() {
     saveQueryApi(newSavedQueries);
     setQuery(queryObject);
   }
+  function onFormReset(queryObject) {
+    let newSavedQueries =[];
+if(queryObject){
+      newSavedQueries = savedQueries.filter(item=>(item.queryName !== queryObject.queryName));
+      console.log(JSON.stringify(queryObject));
+      deleteQueryApi(queryObject);
+    }
+    else{
+      deleteAllQueryApi();
+
+      }
+      setSavedQueries(newSavedQueries);
+      setQuery(exampleQuery);
+
+  } 
+
+
 
   async function getNews(queryObject) {
     if (queryObject.q) {
@@ -82,10 +99,12 @@ export function NewsReader() {
           <div className="box">
             <span className='title'>Query Form</span>
             <QueryForm
+            currentUser={currentUser}
             currentUserMatches={currentUserMatches}
               setFormObject={setQueryFormObject}
               formObject={queryFormObject}
-              submitToParent={onFormSubmit} />
+              submitToParent={onFormSubmit}
+              resetToParent={onFormReset} />
           </div>
           <div className="box">
             <span className='title'>Saved Queries</span>

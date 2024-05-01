@@ -94,3 +94,8 @@ code {
 .titleArt{
   font-size: small;
 }
+.buttonQuery{ 
+  display: flex;
+  background-color: #eee ;
+justify-content: center;
+}

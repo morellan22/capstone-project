@@ -18,7 +18,8 @@ export function QueryForm(params) {
             return;
         }
         params.submitToParent(params.formObject);
-    };
+    }
+
 
     return (
         <div>
@@ -42,8 +43,10 @@ export function QueryForm(params) {
                     <input type="text" size={10} id="pageSize" name="pageSize" value={params.formObject.pageSize} onChange={handleChange} />
                 </div>
             </div>
-             <span style={{ display: "block", backgroundColor: "#eee" }}>
+             <span className="buttonQuery">
                     <input type="button" value="Submit" onClick={onSubmitClick} />
+                    <input type="button" className={(params.currentUser)?"visible":"hidden"} value="Reset" onClick={() => {if(window.confirm('Delete the item?')){params.resetToParent(params.formObject)};}} />
+                    <input type="button" className={(params.currentUserMatches("admin"))?"visible":"hidden"} value="ResetAll" onClick={() => {if(window.confirm('Are you sure you want to erase the list?')){params.resetToParent()};}} />
                 </span>                
             </form>
 
